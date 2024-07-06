@@ -2,7 +2,7 @@
 <html data-bs-theme="light" lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
     <title>Profile - Padel Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -11,39 +11,39 @@
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
-        <div class="container-fluid d-flex flex-column p-0"><a
-                class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-            <div class="sidebar-brand-text mx-3"><span>Padel Tracker</span></div>
-        </a>
-            <hr class="sidebar-divider my-0">
-            <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}"><i class="fas fa-tachometer-alt"></i><span>Menu</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('joueur') }}"><i class="fas fa-user"></i><span>Track ton joueur</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('liste_joueurs_custom') }}"><i class="fas fa-table"></i><span>Liste des joueurs</span></a></li>
-            </ul>
-            <div class="text-center d-none d-md-inline">
-                <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
-            </div>
-        </div>
-    </nav>
-    <div class="d-flex flex-column" id="content-wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
-            <nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow mb-4 topbar">
                 <div class="container-fluid">
-                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                Recherche Joueur <i class="fas fa-search ms-2"></i>
-                            </button>
-                        </div>
-                    </form>
+                    <a class="navbar-brand text-white fw-bold" href="/">Padel Tracker</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white m-0" href="{{ url_for('index') }}">Menu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white m-0" href="{{ url_for('joueur') }}">Track ton joueur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white m-0" href="{{ url_for('liste_joueurs_custom') }}">Liste des joueurs</a>
+                            </li>
+                        </ul>
+                        <form class="d-none d-sm-inline-block form-inline ms-auto my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <button class="btn btn-outline-light d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                    Recherche Joueur <i class="fas fa-search ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </nav>
             <div class="container-fluid"><h3 class="text-dark mb-4">Joueur</h3>
                 <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="col-12 col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-left-primary py-2">
                             <div class="card-body">
                                 <div class="row g-0 align-items-center">
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
+                    <div class="col-12 col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-primary py-2">
                             <div class="card-body">
                                 <div class="row g-0 align-items-center">
                                     <div class="col me-2">
@@ -98,7 +98,7 @@
                                     <div class="col me-2">
                                         <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Podium moyen</span>
                                         </div>
-                                        <div class="text-dark fw-bold h5 mb-0" id="avg-podium"><span>18</span></div>
+                                        <div class="text-dark fw-bold h5 mb-0" id="avg-podium"><span>0</span></div>
                                     </div>
                                     <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
                                 </div>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-lg-4">
+                    <div class="col-12 col-lg-4">
                         <div class="card mb-3">
                             <div class="card-body text-center shadow">
                                 <img class="rounded-circle mb-3 mt-4"
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-12 col-lg-8">
                         <div class="row">
                             <div class="col">
                                 <div class="card shadow mb-3">
@@ -168,36 +168,36 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="prenom"><strong>Prénom</strong></label><input
                                                             class="form-control" type="text" id="prenom"
                                                             placeholder="Prénom" name="prenom"></div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="age"><strong>Age</strong></label><input
                                                             class="form-control" type="text" id="age"
                                                             placeholder="Age" name="age"></div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="nom"><strong>Nom</strong></label><input
                                                             class="form-control" type="text" id="nom"
                                                             placeholder="Nom" name="nom"></div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="licence"><strong>Licence</strong></label><input
                                                             class="form-control" type="text" id="licence"
                                                             placeholder="Licence" name="licence"></div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="ville"><strong>Ville</strong></label><input
                                                         class="form-control" type="text" id="ville" placeholder="Ville" name="ville">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="club"><strong>Club</strong></label><input
                                                         class="form-control" type="text" id="club" placeholder="Club" name="club">
                                                     </div>
@@ -212,36 +212,36 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="coup-favori"><strong>Coup favori</strong></label><input
                                                         class="form-control" type="text" id="coup-favori" placeholder="Coup favori" name="coup-favori">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="type-jeu"><strong>Type de jeu</strong></label><input
                                                         class="form-control" type="text" id="type-jeu" placeholder="Type de jeu" name="type-jeu">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="main-forte"><strong>Main forte</strong></label><input
                                                         class="form-control" type="text" id="main-forte" placeholder="Main forte" name="main-forte">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="frequence"><strong>Frequence</strong></label><input
                                                         class="form-control" type="text" id="frequence" placeholder="Frequence" name="frequence">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="meilleur-classement"><strong>Meilleur classement</strong></label><input
                                                         class="form-control" type="text" id="meilleur-classement" placeholder="Meilleur classement" name="meilleur-classement">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <div class="mb-3"><label class="form-label" for="annee-meilleur-classement"><strong>Annee meilleur classement</strong></label><input
                                                         class="form-control" type="text" id="annee-meilleur-classement" placeholder="Annee meilleur classement" name="annee-meilleur-classement">
                                                     </div>
@@ -485,19 +485,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false,
                 scales: {
                     x: {
-                        display: false, // Hide the X axis
-                        type: 'time',
-                        time: {
-                            unit: 'day',
-                            displayFormats: {
-                                day: 'dd MMM yyyy'
-                            }
-                        }
+                        display: false,
                     },
                     y: {
-                        {#display: false, // Hide the Y axis#}
                         beginAtZero: true,
-                        suggestedMax: Math.max(...pointsCumules) * 1.1
+                        ticks: {
+                            maxTicksLimit: 5,
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
                     }
                 }
             }
