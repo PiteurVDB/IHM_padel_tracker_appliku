@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Padel Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
+        <div class="container-fluid d-flex flex-column p-0"><a
+                class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+            <div class="sidebar-brand-text mx-3"><span>Padel Tracker</span></div>
+        </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}"><i class="fas fa-tachometer-alt"></i><span>Menu</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('joueur') }}"><i class="fas fa-user"></i><span>Track ton joueur</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('liste_joueurs_custom') }}"><i class="fas fa-table"></i><span>Liste des joueurs</span></a></li>
+            </ul>
+            <div class="text-center d-none d-md-inline">
+                <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+                <div class="container-fluid">
+                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                Recherche Joueur <i class="fas fa-search ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div class="container-fluid"><h3 class="text-dark mb-4">Joueur</h3>
+                <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-primary py-2">
+                            <div class="card-body">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                            <span>Participation à 1 tournoi</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0">
+                                            <span id="tournament-played">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"><i class="fa-solid fa-ruler fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-success py-2">
+                            <div class="card-body">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Classement</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span id="ranking">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"><i class="fa-solid fa-ranking-star fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-info py-2">
+                            <div class="card-body">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Nombre de points</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span id="nb-points">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"><i class="fa-solid fa-arrow-up-9-1 fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-secondary py-2">
+                            <div class="card-body">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Podium moyen</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0" id="avg-podium"><span>18</span></div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow">
+                                <img class="rounded-circle mb-3 mt-4"
+                                   src="{{ url_for('static', filename='img/dogs/image2.jpeg') }}"
+                                   width="160" height="160">
+                                <div class="mb-3"></div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="text-primary fw-bold m-0">Répartition des tournois</h6></div>
+                            <div class="card-body"><h4 class="small fw-bold">P20<span
+                                class="float-end">20%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 20%;"><span
+                                            class="visually-hidden">20%</span></div>
+                                </div>
+                                <h4 class="small fw-bold">P100<span class="float-end">40%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 40%;"><span
+                                            class="visually-hidden">40%</span></div>
+                                </div>
+                                <h4 class="small fw-bold">P250<span class="float-end">60%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 60%;"><span
+                                            class="visually-hidden">60%</span></div>
+                                </div>
+                                <h4 class="small fw-bold">P500<span class="float-end">80%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 80%;"><span
+                                            class="visually-hidden">80%</span></div>
+                                </div>
+                                <h4 class="small fw-bold">P1000<span class="float-end">Complete!</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 100%;"><span
+                                            class="visually-hidden">100%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center"><h6
+                                    class="text-primary fw-bold m-0">Liste des tournois</h6>
+                            </div>
+                            <div class="card-body" id="tournamentList">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3"><p class="text-primary m-0 fw-bold">Information Joueurs</p></div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="prenom"><strong>Prénom</strong></label><input
+                                                            class="form-control" type="text" id="prenom"
+                                                            placeholder="Prénom" name="prenom"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="age"><strong>Age</strong></label><input
+                                                            class="form-control" type="text" id="age"
+                                                            placeholder="Age" name="age"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="nom"><strong>Nom</strong></label><input
+                                                            class="form-control" type="text" id="nom"
+                                                            placeholder="Nom" name="nom"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="licence"><strong>Licence</strong></label><input
+                                                            class="form-control" type="text" id="licence"
+                                                            placeholder="Licence" name="licence"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="ville"><strong>Ville</strong></label><input
+                                                        class="form-control" type="text" id="ville" placeholder="Ville" name="ville">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="club"><strong>Club</strong></label><input
+                                                        class="form-control" type="text" id="club" placeholder="Club" name="club">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-1"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3"><p class="text-primary m-0 fw-bold">Information Secondaires</p></div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="coup-favori"><strong>Coup favori</strong></label><input
+                                                        class="form-control" type="text" id="coup-favori" placeholder="Coup favori" name="coup-favori">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="type-jeu"><strong>Type de jeu</strong></label><input
+                                                        class="form-control" type="text" id="type-jeu" placeholder="Type de jeu" name="type-jeu">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="main-forte"><strong>Main forte</strong></label><input
+                                                        class="form-control" type="text" id="main-forte" placeholder="Main forte" name="main-forte">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="frequence"><strong>Frequence</strong></label><input
+                                                        class="form-control" type="text" id="frequence" placeholder="Frequence" name="frequence">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="meilleur-classement"><strong>Meilleur classement</strong></label><input
+                                                        class="form-control" type="text" id="meilleur-classement" placeholder="Meilleur classement" name="meilleur-classement">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3"><label class="form-label" for="annee-meilleur-classement"><strong>Annee meilleur classement</strong></label><input
+                                                        class="form-control" type="text" id="annee-meilleur-classement" placeholder="Annee meilleur classement" name="annee-meilleur-classement">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-1"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3"><p class="text-primary m-0 fw-bold">Évolution des points FFT</p></div>
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <canvas id="pointsChart"></canvas>
+                                            <div class="mb-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Padel Tracker 2024</span></div>
+            </div>
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+
+<!-- Modal pour la recherche des joueurs -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Recherche de Joueur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="playerSearchForm">
+                    <div class="mb-3">
+                        <label for="nomInput" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nomInput" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prenomInput" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenomInput" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </form>
+                <div id="searchResults" class="mt-3" style="display: none;">
+                    <h6>Résultats de la recherche:</h6>
+                    <ul id="playerList" class="list-group">
+                        <!-- Les résultats de la recherche seront ajoutés ici dynamiquement -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal affichant les détails du tournoi -->
+<div class="modal fade" id="tournamentModal" tabindex="-1" aria-labelledby="tournamentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tournamentModalLabel">Détails du tournoi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="tournamentModalBody">
+                <!-- Le contenu sera inséré ici -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/af1acf7946.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="/static/js/script.min.js?h=bdf36300aae20ed8ebca7e88738d5267"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const playerSearchForm = document.getElementById('playerSearchForm');
+    const searchResults = document.getElementById('searchResults');
+    const playerList = document.getElementById('playerList');
+
+    playerSearchForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nom = document.getElementById('nomInput').value;
+    const prenom = document.getElementById('prenomInput').value;
+
+    // Envoyer la requête au backend
+    fetch('/search_players', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nom, prenom })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Afficher les résultats
+        playerList.innerHTML = '';
+        if (data.total > 0) {
+            data.hits.forEach(player => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex align-items-center py-3';
+                li.innerHTML = `
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <img src="${player.picture || "{{ url_for('static', filename='img/dogs/image2.jpeg') }}"}"
+                             alt="${player.firstName} ${player.lastName}"
+                             class="rounded-circle me-3"
+                             style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <strong>${player.lastName} ${player.firstName}</strong><br>
+                            <small class="text-muted">${player.licenceClubLabel} - ${player.city}</small>
+                        </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill ms-auto">${player.currentRankingLabel}</span>
+                `;
+                li.addEventListener('click', () => selectPlayer(player));
+                playerList.appendChild(li);
+            });
+            searchResults.style.display = 'block';
+        } else {
+            playerList.innerHTML = '<li class="list-group-item">Aucun joueur trouvé</li>';
+            searchResults.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        playerList.innerHTML = '<li class="list-group-item">Erreur lors de la recherche</li>';
+        searchResults.style.display = 'block';
+    });
+});
+
+    function selectPlayer(player) {
+    // Fermer le modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('searchModal'));
+    modal.hide();
+
+    // Envoyer les données du joueur au backend
+    fetch('/get_player_stats', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(player)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Mettre à jour la page avec les nouvelles informations
+        updatePlayerPage(data);
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur lors de la récupération des statistiques du joueur');
+    });
+    }
+
+    function calculateTournamentDistribution(tournois) {
+        const distribution = {
+            'P25': 0,
+            'P100': 0,
+            'P250': 0,
+            'P500': 0,
+            'P1000': 0
+        };
+
+        tournois.forEach(tournoi => {
+            if (distribution.hasOwnProperty(tournoi.epreuve)) {
+                distribution[tournoi.epreuve]++;
+            }
+        });
+
+        const total = Object.values(distribution).reduce((a, b) => a + b, 0);
+
+        Object.keys(distribution).forEach(key => {
+            distribution[key] = total > 0 ? Math.round((distribution[key] / total) * 100) : 0;
+        });
+
+        return distribution;
+    }
+
+    function createPointsChart(data) {
+        if (!data.liste_tournoi) {
+            console.error('La liste des tournois est indéfinie');
+            return;
+        }
+
+        // Préparer les données pour le graphique
+        const tournoiData = data.liste_tournoi;
+
+        const dates = tournoiData.map(tournoi => {
+            return tournoi.date_tournoi;
+        }).reverse();
+
+        const points = tournoiData.map(tournoi => {
+            return tournoi.nb_points;
+        });
+
+        // Calculer les points cumulés
+        let pointsCumules = [];
+        let totalPoints = 0;
+        for (let point of points) {
+            totalPoints += point;
+            pointsCumules.push(totalPoints);
+        }
+
+        // Obtenir le contexte du canvas
+        const ctx = document.getElementById('pointsChart').getContext('2d');
+
+        // Détruire le graphique existant s'il existe
+        if (window.pointsChart instanceof Chart) {
+            window.pointsChart.destroy();
+        }
+
+        // Création du graphique
+        pointsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [
+                {
+                    label: 'Points cumulés',
+                    data: pointsCumules,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: false, // Hide the X axis
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            displayFormats: {
+                                day: 'dd MMM yyyy'
+                            }
+                        }
+                    },
+                    y: {
+                        {#display: false, // Hide the Y axis#}
+                        beginAtZero: true,
+                        suggestedMax: Math.max(...pointsCumules) * 1.1
+                    }
+                }
+            }
+        });
+    }
+
+    function createTournamentTile(tournoi) {
+        const tile = document.createElement('div');
+        tile.classList.add('col-md-12', 'tournament-tile');
+        tile.innerHTML = `
+            <div class="d-flex align-items-center flex-grow-1" style="border-bottom: 1px solid #ddd; padding: 10px;">
+                <div>
+                    <strong>${tournoi.epreuve} </strong><small class="text-muted"> - ${tournoi.date_tournoi} </small><br>
+                    <small class="text-muted">${tournoi.prenom_partenaire} - ${tournoi.nom_partenaire}</small>
+                </div>
+                <span class="bg-primary rounded-pill ms-auto">
+                    <button type="button" class="btn btn-primary p-auto show-tournament-details" data-tournoi-id="${tournoi.id_tournoi}">Voir détails</button>
+                </span>
+            </div>
+        `;
+        return tile;
+    }
+
+
+    function showTournamentDetails(tournoiId, playerData) {
+        const tournoi = playerData.liste_tournoi.find(t => t.id_tournoi === parseInt(tournoiId, 10));
+        if (tournoi) {
+            const modalTitle = document.getElementById('tournamentModalLabel');
+            const modalBody = document.getElementById('tournamentModalBody');
+
+            modalTitle.textContent = `Détails du tournoi - ${tournoi.epreuve}`;
+            modalBody.innerHTML = `
+                <p><strong>Date:</strong> ${tournoi.date_tournoi}</p>
+                <p><strong>ID:</strong> ${tournoi.id_tournoi}</p>
+                <p><strong>Partenaire:</strong> ${tournoi.prenom_partenaire} ${tournoi.nom_partenaire}</p>
+                <p><strong>Classement:</strong> ${tournoi.classement}</p>
+                <p><strong>Points:</strong> ${tournoi.nb_points}</p>
+            `;
+
+            const modal = new bootstrap.Modal(document.getElementById('tournamentModal'));
+            modal.show();
+        } else {
+            console.error('Tournoi non trouvé pour l\'ID:', tournoiId);
+        }
+    }
+
+
+    function updatePlayerPage(playerData) {
+        // Mettre à jour les éléments de la page avec les nouvelles données
+        document.getElementById('prenom').value = playerData.prenom || '';
+        document.getElementById('nom').value = playerData.nom || '';
+        document.getElementById('age').value = playerData.age || '';
+        document.getElementById('licence').value = playerData.licence || '';
+        document.getElementById('club').value = playerData.nom_club || '';
+        document.getElementById('ville').value = playerData.ville || '';
+        document.getElementById('coup-favori').value = playerData.coup_favori || '';
+        document.getElementById('type-jeu').value = playerData.type_jeu || '';
+        document.getElementById('main-forte').value = playerData.main_forte || '';
+        document.getElementById('frequence').value = playerData.frequence || '';
+        document.getElementById('meilleur-classement').value = playerData.meilleur_rang || '';
+        document.getElementById('annee-meilleur-classement').value = playerData.meilleur_annee || '';
+
+        // Mettre à jour les statistiques
+        document.getElementById('tournament-played').textContent = playerData.nb_tournoi || '0';
+        document.getElementById('ranking').textContent = playerData.rang || '0';
+        document.getElementById('nb-points').textContent = playerData.points || '0';
+        document.getElementById('avg-podium').textContent = playerData.avg_podium || '0';
+
+        // Mettre à jour l'image du profil si disponible
+        const profileImage = document.querySelector('.rounded-circle.mb-3.mt-4');
+        if (profileImage && playerData.image) {
+            profileImage.src = playerData.image;
+        } else {
+            profileImage.src = '/static/img/dogs/image2.jpeg';
+        }
+
+        // Mettre à jour la répartition des tournois
+        const tournamentDistribution = calculateTournamentDistribution(playerData.liste_tournoi);
+        const tournamentTypes = ['P25', 'P100', 'P250', 'P500', 'P1000'];
+
+        tournamentTypes.forEach((type, index) => {
+            const percentage = tournamentDistribution[type];
+            const element = document.querySelector(`.progress-bar[aria-valuenow="${(index + 1) * 20}"]`);
+            if (element) {
+                element.style.width = `${percentage}%`;
+                element.setAttribute('aria-valuenow', percentage);
+                element.innerHTML = `<span class="visually-hidden">${percentage}%</span>`;
+
+                const label = element.closest('.card-body').querySelector(`h4.small.fw-bold:nth-child(${index * 2 + 1})`);
+                if (label) {
+                    label.innerHTML = `${type}<span class="float-end">${percentage}%</span>`;
+                }
+            }
+        })
+
+        // Créer le graphique des points
+        createPointsChart(playerData);
+
+        // Créer les tuiles pour les tournois
+        const tournamentList = document.getElementById('tournamentList');
+        tournamentList.innerHTML = ''; // Vider la liste avant d'ajouter de nouveaux éléments
+
+        playerData.liste_tournoi.forEach(tournoi => {
+            const tile = createTournamentTile(tournoi);
+            tournamentList.appendChild(tile);
+        });
+
+        // Utiliser la délégation d'événements pour gérer les clics sur les boutons
+        tournamentList.addEventListener('click', function(event) {
+            console.log(event)
+            if (event.target.classList.contains('show-tournament-details')) {
+                const tournoiId = event.target.getAttribute('data-tournoi-id');
+                showTournamentDetails(tournoiId, playerData);
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

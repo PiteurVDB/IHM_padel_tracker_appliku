@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Accueil - Padel Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        #content-wrapper {
+            flex: 1;
+        }
+        .hero-section {
+            background-color: #4e73df;
+            color: white;
+            padding: 50px 0;
+        }
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 500px;
+            overflow: hidden;
+        }
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4e73df;
+        }
+        @media (max-width: 768px) {
+            .hero-image-container {
+                max-height: 500px;
+            }
+            .hero-image {
+                max-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Padel Tracker</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('index') }}"><i class="fas fa-tachometer-alt"></i><span>Menu</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('joueur') }}"><i class="fas fa-user"></i><span>Track ton joueur</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('liste_joueurs_custom') }}"><i class="fas fa-table"></i><span>Liste des joueurs</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h3 class="text-dark mb-0">Accueil</h3>
+                    </div>
+                </nav>
+
+                <div class="container-fluid">
+                    <div class="hero-section">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 m-lg-5">
+                                <h1 class="display-4 mb-4">Bienvenue sur Padel Tracker</h1>
+                                <p class="lead mb-4">Suivez vos performances, analysez vos statistiques et comparez-vous aux meilleurs joueurs de padel.</p>
+                                <a href="{{ url_for('joueur') }}" class="btn btn-light btn-lg me-3 mb-2">Track ton joueur</a>
+                                <a href="{{ url_for('liste_joueurs_custom') }}" class="btn btn-outline-light btn-lg mb-2">Liste des joueurs</a>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="hero-image-container">
+                                    <img src="{{ url_for('static', filename='img/autre/Padel-illustation-removebg-preview.png') }}" alt="Illustration Padel" class="hero-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="py-5">
+                        <div class="row">
+                            <div class="col-md-6 text-center mb-4">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Suivez vos progrès</h3>
+                                <p>Visualisez l'évolution de vos performances au fil du temps.</p>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <div class="feature-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h3>Classement en temps réel</h3>
+                                <p>Comparez-vous aux autres joueurs et suivez votre progression dans le classement.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Padel Tracker 2024</span></div>
+                </div>
+            </footer>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.min.js') }}"></script>
+</body>
+</html>
