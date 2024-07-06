@@ -44,11 +44,11 @@ def get_player_stats():
     info_joueur['prenom'] = prenom
     info_joueur['nom'] = nom
     info_joueur['ville'] = ville
-    info_joueur['age'] = age
+    info_joueur['age'] = age    
     info_joueur['nom_club'] = nom_club
     info_joueur['image'] = image
 
-    print(json.dumps(info_joueur, indent=4))
+    # print(json.dumps(info_joueur, indent=4))
 
     # Vous pouvez simplement retourner le dictionnaire
     return jsonify(info_joueur)

@@ -13,35 +13,33 @@
 <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow mb-4 topbar">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-white fw-bold" href="/">Padel Tracker</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="navbar-brand fw-bold" href="/">Padel Tracker</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white m-0" href="{{ url_for('index') }}">Menu</a>
+                                <a class="nav-link" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white m-0" href="{{ url_for('joueur') }}">Track ton joueur</a>
+                                <a class="nav-link" href="/joueur">Track ton joueur</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white m-0" href="{{ url_for('liste_joueurs_custom') }}">Liste des joueurs</a>
+                                <a class="nav-link" href="/liste_joueurs_custom">Liste des joueurs</a>
                             </li>
                         </ul>
-                        <form class="d-none d-sm-inline-block form-inline ms-auto my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <button class="btn btn-outline-light d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                    Recherche Joueur <i class="fas fa-search ms-2"></i>
-                                </button>
-                            </div>
+                        <form class="d-flex">
+                            <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                <i class="fas fa-search"></i> Recherche Joueur
+                            </button>
                         </form>
                     </div>
                 </div>
             </nav>
-            <div class="container-fluid"><h3 class="text-dark mb-4">Joueur</h3>
+            <div class="container-fluid mt-3"><h3 class="text-dark mb-4">Joueur</h3>
                 <div class="row">
                     <div class="col-12 col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-left-primary py-2">
@@ -118,36 +116,36 @@
                         </div>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3"><h6 class="text-primary fw-bold m-0">Répartition des tournois</h6></div>
-                            <div class="card-body"><h4 class="small fw-bold">P20<span
-                                class="float-end">20%</span></h4>
+                            <div class="card-body">
+                                <h4 class="small fw-bold" data-tournament-type="P25">P25<span class="float-end">0%</span></h4>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0"
-                                         aria-valuemax="100" style="width: 20%;"><span
-                                            class="visually-hidden">20%</span></div>
+                                    <div class="progress-bar bg-danger" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-tournament-type="P25">
+                                        <span class="visually-hidden">0%</span>
+                                    </div>
                                 </div>
-                                <h4 class="small fw-bold">P100<span class="float-end">40%</span></h4>
+                                <h4 class="small fw-bold" data-tournament-type="P100">P100<span class="float-end">0%</span></h4>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0"
-                                         aria-valuemax="100" style="width: 40%;"><span
-                                            class="visually-hidden">40%</span></div>
+                                    <div class="progress-bar bg-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-tournament-type="P100">
+                                        <span class="visually-hidden">0%</span>
+                                    </div>
                                 </div>
-                                <h4 class="small fw-bold">P250<span class="float-end">60%</span></h4>
+                                <h4 class="small fw-bold" data-tournament-type="P250">P250<span class="float-end">0%</span></h4>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0"
-                                         aria-valuemax="100" style="width: 60%;"><span
-                                            class="visually-hidden">60%</span></div>
+                                    <div class="progress-bar bg-warning" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-tournament-type="P250">
+                                        <span class="visually-hidden">0%</span>
+                                    </div>
                                 </div>
-                                <h4 class="small fw-bold">P500<span class="float-end">80%</span></h4>
+                                <h4 class="small fw-bold" data-tournament-type="P500">P500<span class="float-end">0%</span></h4>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0"
-                                         aria-valuemax="100" style="width: 80%;"><span
-                                            class="visually-hidden">80%</span></div>
+                                    <div class="progress-bar bg-primary" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-tournament-type="P500">
+                                        <span class="visually-hidden">0%</span>
+                                    </div>
                                 </div>
-                                <h4 class="small fw-bold">P1000<span class="float-end">Complete!</span></h4>
+                                <h4 class="small fw-bold" data-tournament-type="P1000">P1000<span class="float-end">0%</span></h4>
                                 <div class="progress progress-sm mb-3">
-                                    <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0"
-                                         aria-valuemax="100" style="width: 100%;"><span
-                                            class="visually-hidden">100%</span></div>
+                                    <div class="progress-bar bg-info" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-tournament-type="P1000">
+                                        <span class="visually-hidden">0%</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -408,14 +406,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateTournamentDistribution(tournois) {
+        const tournamentTypes = ['P25', 'P100', 'P250', 'P500', 'P1000'];
         const distribution = {
-            'P25': 0,
-            'P100': 0,
-            'P250': 0,
-            'P500': 0,
-            'P1000': 0
+            'P25': 0, 'P100': 0, 'P250': 0, 'P500': 0, 'P1000': 0
         };
 
+        // Compter les tournois
         tournois.forEach(tournoi => {
             if (distribution.hasOwnProperty(tournoi.epreuve)) {
                 distribution[tournoi.epreuve]++;
@@ -424,11 +420,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const total = Object.values(distribution).reduce((a, b) => a + b, 0);
 
-        Object.keys(distribution).forEach(key => {
-            distribution[key] = total > 0 ? Math.round((distribution[key] / total) * 100) : 0;
+        // Mettre à jour toutes les barres, même celles à 0%
+        tournamentTypes.forEach(type => {
+            const percentage = total > 0 ? Math.round((distribution[type] / total) * 100) : 0;
+            const progressBar = document.querySelector(`.progress-bar[data-tournament-type="${type}"]`);
+            const label = document.querySelector(`h4[data-tournament-type="${type}"]`);
+
+            if (progressBar && label) {
+                // Forcer une mise à jour du style
+                progressBar.style.width = '0%';
+                void progressBar.offsetWidth; // Trigger a reflow
+                progressBar.style.width = `${percentage}%`;
+                progressBar.setAttribute('aria-valuenow', percentage);
+                progressBar.innerHTML = `<span class="visually-hidden">${percentage}%</span>`;
+
+                label.innerHTML = `${type}<span class="float-end">${percentage}%</span>`;
+            } else {
+                console.error(`Éléments non trouvés pour le type de tournoi: ${type}`);
+            }
         });
 
-        return distribution;
+        console.log('Distribution mise à jour:', distribution);
     }
 
     function createPointsChart(data) {
@@ -574,23 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Mettre à jour la répartition des tournois
-        const tournamentDistribution = calculateTournamentDistribution(playerData.liste_tournoi);
-        const tournamentTypes = ['P25', 'P100', 'P250', 'P500', 'P1000'];
-
-        tournamentTypes.forEach((type, index) => {
-            const percentage = tournamentDistribution[type];
-            const element = document.querySelector(`.progress-bar[aria-valuenow="${(index + 1) * 20}"]`);
-            if (element) {
-                element.style.width = `${percentage}%`;
-                element.setAttribute('aria-valuenow', percentage);
-                element.innerHTML = `<span class="visually-hidden">${percentage}%</span>`;
-
-                const label = element.closest('.card-body').querySelector(`h4.small.fw-bold:nth-child(${index * 2 + 1})`);
-                if (label) {
-                    label.innerHTML = `${type}<span class="float-end">${percentage}%</span>`;
-                }
-            }
-        })
+        calculateTournamentDistribution(playerData.liste_tournoi);
 
         // Créer le graphique des points
         createPointsChart(playerData);
@@ -606,7 +602,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Utiliser la délégation d'événements pour gérer les clics sur les boutons
         tournamentList.addEventListener('click', function(event) {
-            console.log(event)
             if (event.target.classList.contains('show-tournament-details')) {
                 const tournoiId = event.target.getAttribute('data-tournoi-id');
                 showTournamentDetails(tournoiId, playerData);

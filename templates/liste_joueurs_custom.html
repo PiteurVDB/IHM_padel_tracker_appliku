@@ -15,28 +15,28 @@
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow mb-4 topbar">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
                     <div class="container-fluid">
-                        <a class="navbar-brand text-white fw-bold" href="/">Padel Tracker</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <a class="navbar-brand fw-bold" href="/">Padel Tracker</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav me-auto">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white m-0" href="{{ url_for('index') }}">Menu</a>
+                                    <a class="nav-link" href="/">Accueil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white m-0" href="{{ url_for('joueur') }}">Track ton joueur</a>
+                                    <a class="nav-link" href="/joueur">Track ton joueur</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white m-0" href="{{ url_for('liste_joueurs_custom') }}">Liste des joueurs</a>
+                                    <a class="nav-link" href="/liste_joueurs_custom">Liste des joueurs</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <div class="container-fluid">
+                <div class="container-fluid mt-3">
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold">Classement des joueurs</p>
@@ -66,31 +66,43 @@
                 .then(data => {
                     // Configurer les options de la grille avec les données chargées
                     const gridOptions = {
-                        // Données à afficher dans la grille
                         rowData: data.classement.rows,
-                        // Colonnes à afficher (doivent correspondre aux propriétés des données)
                         columnDefs: [
-                            { headerName: "Nom", field: "nom", sortable: true, filter: true },
-                            { headerName: "Prénom", field: "prenom", sortable: true, filter: true },
-                            { headerName: "Licence", field: "licence", sortable: true, filter: true },
-                            { headerName: "Nationalité", field: "nationnalite.code", sortable: true, filter: true },
-                            { headerName: "Année de Naissance", field: "anneeNaissance", sortable: true, filter: true },
-                            { headerName: "Club", field: "nomClub", sortable: true, filter: true },
-                            { headerName: "Ligue", field: "nomLigue", sortable: true, filter: true },
-                            { headerName: "Rang", field: "rang", sortable: true, filter: true },
-                            { headerName: "Points", field: "points", sortable: true, filter: true },
-                            { headerName: "Tournois", field: "nombreDeTournois", sortable: true, filter: true },
+                            { headerName: "Nom", field: "nom", sortable: true, filter: true, minWidth: 120 },
+                            { headerName: "Prénom", field: "prenom", sortable: true, filter: true, minWidth: 120 },
+                            { headerName: "Rang", field: "rang", sortable: true, filter: true, minWidth: 80 },
+                            { headerName: "Points", field: "points", sortable: true, filter: true, minWidth: 80 },
+                            { headerName: "Licence", field: "licence", sortable: true, filter: true, minWidth: 100 },
+                            { headerName: "Nationalité", field: "nationnalite.code", sortable: true, filter: true, minWidth: 100 },
+                            { headerName: "Année", field: "anneeNaissance", sortable: true, filter: true, minWidth: 80 },
+                            { headerName: "Club", field: "nomClub", sortable: true, filter: true, minWidth: 150 },
+                            { headerName: "Ligue", field: "nomLigue", sortable: true, filter: true, minWidth: 120 },
+                            { headerName: "Tournois", field: "nombreDeTournois", sortable: true, filter: true, minWidth: 100 },
                         ],
-                        // Options par défaut pour les colonnes
                         defaultColDef: {
                             flex: 1,
                             sortable: true,
                             resizable: true,
                             filter: true,
+                            minWidth: 80, // Largeur minimale par défaut pour toutes les colonnes
                         },
-                        // Pagination avec 100 lignes par page par défaut
                         pagination: true,
                         paginationPageSize: 100,
+                        // Activer le défilement horizontal sur les petits écrans
+                        suppressHorizontalScroll: false,
+                        
+                        // Permettre le redimensionnement automatique des colonnes
+                        autoSizeColumns: true,
+                        
+                        // Ajuster automatiquement la taille des colonnes au chargement initial
+                        onGridReady: params => {
+                            params.api.sizeColumnsToFit();
+                        },
+                        
+                        // Réajuster la taille des colonnes lors du redimensionnement de la fenêtre
+                        onGridSizeChanged: params => {
+                            params.api.sizeColumnsToFit();
+                        },
                     };
 
                     // Créer la grille dans l'élément avec id 'myGrid'

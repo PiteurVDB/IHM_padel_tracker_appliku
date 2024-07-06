@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#content-wrapper {
+    flex: 1;
+}
+.hero-section {
+    background-color: #4e73df;
+    color: white;
+    padding: 50px 0;
+}
+.hero-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 500px;
+    overflow: hidden;
+}
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+}
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #4e73df;
+}
+@media (max-width: 768px) {
+    .hero-image-container {
+        max-height: 500px;
+    }
+    .hero-image {
+        max-height: 500px;
+    }
+}
