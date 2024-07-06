@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from functions import *
 from datetime import datetime
+
 app = Flask(__name__)
 
 @app.route('/')
