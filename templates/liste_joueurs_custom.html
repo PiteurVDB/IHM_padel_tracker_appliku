@@ -66,7 +66,7 @@
                 .then(data => {
                     // Configurer les options de la grille avec les données chargées
                     const gridOptions = {
-                        rowData: data.classement.rows,
+                        rowData: data,
                         columnDefs: [
                             { headerName: "Nom", field: "nom", sortable: true, filter: true, minWidth: 120 },
                             { headerName: "Prénom", field: "prenom", sortable: true, filter: true, minWidth: 120 },
