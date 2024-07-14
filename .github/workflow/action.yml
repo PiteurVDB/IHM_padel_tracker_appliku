@@ -1,0 +1,42 @@
+name: Run Python script on the first Tuesday of the month
+
+on:
+  schedule:
+    - cron: '0 15 1-7 * *' # Runs at 15:00 UTC on the 1st to 7th of each month
+
+jobs:
+  check-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if today is the first Tuesday
+        id: check-day
+        run: |
+          if [ $(date +%u) -eq 2 ]; then
+            echo "is_first_tuesday=true" >> $GITHUB_ENV
+          else
+            echo "is_first_tuesday=false" >> $GITHUB_ENV
+
+      - name: Stop job if not the first Tuesday
+        if: env.is_first_tuesday == 'false'
+        run: echo "Today is not the first Tuesday. Exiting job."
+        continue-on-error: true
+
+      - name: Check out the repository
+        if: env.is_first_tuesday == 'true'
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        if: env.is_first_tuesday == 'true'
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # specify your python version
+
+      - name: Install dependencies
+        if: env.is_first_tuesday == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt # if you have dependencies
+
+      - name: Run the Python script if it's the first Tuesday
+        if: env.is_first_tuesday == 'true'
+        run: python get_player_classement.py
