@@ -1,8 +1,10 @@
 import requests
 import json
+from datetime import datetime
 
 all_data = []
 tranche = 100
+date = datetime.now().strftime('%Y-%m-%dT00')
 
 headers = {
     'accept': 'application/json, text/plain, */*',
@@ -12,7 +14,7 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
 }
 while True:
-    url = f"https://tenup.fft.fr/classement-padel?date=2024-05-07T00%3A00%3A00.000&age=&tranche={tranche}&type=H&export"
+    url = f"https://tenup.fft.fr/classement-padel?date={date}%3A00%3A00.000&age=&tranche={tranche}&type=H&export"
 
     if tranche == 200:
         tranche = 44100
