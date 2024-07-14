@@ -1,10 +1,21 @@
 import requests
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 all_data = []
 tranche = 100
-date = datetime.now().strftime('%Y-%m-%dT00')
+
+# Obtenir la date actuelle
+now = datetime.now()
+
+# Déterminer le premier jour du mois actuel
+first_day = datetime(now.year, now.month, 1)
+
+# Calculer le nombre de jours jusqu'au premier mardi
+days_to_first_tuesday = 7 if (1 - first_day.weekday() + 7) % 7 == 0 else (1 - first_day.weekday() + 7) % 7
+
+# Ajouter les jours nécessaires pour atteindre le premier mardi
+first_tuesday_of_month = (first_day + timedelta(days=days_to_first_tuesday)).strftime('%Y-%m-%dT00')
 
 headers = {
     'accept': 'application/json, text/plain, */*',
